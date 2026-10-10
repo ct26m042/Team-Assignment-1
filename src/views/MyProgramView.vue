@@ -1,7 +1,13 @@
+<script setup>
+import { useMyProgram } from '../composables/useMyProgram'
+
+const { count } = useMyProgram()
+</script>
+
 <template>
   <section>
     <h1>Mein Programm</h1>
-    <p>Gespeicherte Sessions erscheinen hier, sobald der persönliche Zustand angebunden ist.</p>
+    <p>{{ count }} gespeicherte Sessions</p>
   </section>
 </template>
 

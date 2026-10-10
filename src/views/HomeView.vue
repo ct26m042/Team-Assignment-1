@@ -1,14 +1,16 @@
 <script setup>
 import BaseBadge from '../components/base/BaseBadge.vue'
+import { useConferenceData } from '../composables/useConferenceData'
+
+const { conference, sessions } = useConferenceData()
 </script>
 
 <template>
   <section class="home">
-    <BaseBadge>FrontendNow</BaseBadge>
+    <BaseBadge>{{ conference.name }}</BaseBadge>
     <h1>Relay</h1>
-    <p>
-      Dein Programm für die Konferenz, zusammengestellt wie ein Line-up.
-    </p>
+    <p>Dein Programm für die Konferenz, zusammengestellt wie ein Line-up.</p>
+    <p>{{ sessions.length }} Sessions</p>
   </section>
 </template>
 
@@ -22,5 +24,9 @@ import BaseBadge from '../components/base/BaseBadge.vue'
 h1 {
   margin: 0;
   font-size: var(--font-size-display);
+}
+
+p {
+  margin: 0;
 }
 </style>
