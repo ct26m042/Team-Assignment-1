@@ -1,0 +1,37 @@
+:root {
+  --color-ink: #14211f;
+  --color-paper: #f4f1ea;
+  --color-teal: #0c5c56;
+  --color-sand: #e4ddd0;
+  --color-mist: #4e5a53;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2.25rem;
+
+  --font-sans: "Segoe UI", system-ui, sans-serif;
+  --font-serif: Georgia, "Palatino Linotype", serif;
+
+  --color-surface: var(--color-paper);
+  --color-text-primary: var(--color-ink);
+  --color-text-muted: var(--color-mist);
+  --color-accent: var(--color-teal);
+  --color-on-accent: var(--color-paper);
+  --color-border: var(--color-sand);
+  --space-page: var(--space-6);
+  --font-body: var(--font-sans);
+  --font-display: var(--font-serif);
+  --font-size-body: var(--font-size-md);
+  --font-size-display: var(--font-size-2xl);
+}
