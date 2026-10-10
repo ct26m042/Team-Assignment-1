@@ -2,7 +2,7 @@
 
 ## Markenkonzept
 
-Relay ist die Programmoberfläche für die Konferenz FrontendNow. Der Name beschreibt, was die Seite tut: Sie reicht eine Session von der öffentlichen Liste in ein persönliches Programm weiter, wie ein Line-up, das man selbst zusammenstellt. Eine generische Konferenz-Website zeigt Zeitplan, Räume und Sprecher als Tabelle und überlässt die Auswahl dem Ausdruck oder dem Gedächtnis. Relay behandelt die Auswahl als den eigentlichen Inhalt. Die Übersicht bleibt ruhig und lesbar, die Aktion „Zum Programm hinzufügen“ ist der Akzent, nicht eine weitere Kachel in einem Raster aus gleich lauten Karten.
+Relay ist die Programmoberfläche für die Konferenz FrontendNow. Der Name beschreibt, was die Seite tut: Sie reicht eine Session von der öffentlichen Liste in ein persönliches Programm weiter, wie ein Line-up, das man selbst zusammenstellt. Eine krasse Konferenz-Website zeigt Zeitplan, Räume und Sprecher als Tabelle und überlässt die Auswahl dem Ausdruck oder dem Gedächtnis. Relay behandelt die Auswahl als den eigentlichen Inhalt. Die Übersicht bleibt ruhig und lesbar, die Aktion „Zum Programm hinzufügen“ ist der Akzent, nicht eine weitere Kachel in einem Raster aus gleich lauten Karten.
 
 Die visuelle Richtung ist Papier und Druckfarbe, nicht das übliche Produkt-Blau. Der Hintergrund ist ein warmes Papier (`color-paper`), der Text ein fast schwarzes Grün (`color-ink`), der Akzent ein tiefes Petrol (`color-teal`). Serifen nur für den Markennamen, die Oberfläche selbst bleibt in einer System-Sans, damit Session-Titel in langen Listen nicht ornamental werden. Abstände folgen einer festen Skala, damit Karten, Navigation und spätere Filter dieselben Rhythmen nutzen, ohne dass jede View eigene Pixelwerte erfindet.
 
