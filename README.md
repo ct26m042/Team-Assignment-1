@@ -1,29 +1,18 @@
-# team-assignment
+# Relay
 
-This template should help get you started developing with Vue 3 in Vite.
+Programmoberfläche für die Konferenz FrontendNow. Dieses Repository ist das Grundgerüst aus Schritt 1: Branding, Architektur und ein lauffähiger Rahmen, noch ohne die fertigen Programm-Features.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Setup
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+Der Entwicklungsserver zeigt die Startseite mit der Anzahl der Sessions. Weitere Routen: `/programm`, `/sessions/s01`, `/mein-programm`.
 
-```sh
-npm run build
-```
+## Wo was liegt
+
+- Design-Tokens: `tokens/tokens.json` und `src/assets/tokens.css`
+- Konferenzdaten: `src/data/conference-data.json`
+- Entscheidungen: `docs/schritt1/`
