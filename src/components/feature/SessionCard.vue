@@ -2,9 +2,8 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import BaseBadge from '../base/BaseBadge.vue'
-import BaseButton from '../base/BaseButton.vue'
+import ProgramToggleButton from './ProgramToggleButton.vue'
 import { useConferenceData } from '../../composables/useConferenceData'
-import { useMyProgram } from '../../composables/useMyProgram'
 import { formatDay } from '../../utils/formatDay'
 
 const props = defineProps({
@@ -15,20 +14,10 @@ const props = defineProps({
 })
 
 const { trackById, roomById, speakersForSession } = useConferenceData()
-const { has, add, remove } = useMyProgram()
 
 const track = computed(() => trackById(props.session.trackId))
 const room = computed(() => roomById(props.session.roomId))
 const speakers = computed(() => speakersForSession(props.session))
-const saved = computed(() => has(props.session.id))
-
-function toggle() {
-  if (saved.value) {
-    remove(props.session.id)
-  } else {
-    add(props.session.id)
-  }
-}
 </script>
 
 <template>
@@ -54,9 +43,7 @@ function toggle() {
         {{ speaker.name }}
       </RouterLink>
     </p>
-    <BaseButton class="card__action" type="button" @click="toggle">
-      {{ saved ? 'Entfernen' : 'Zu meinem Programm hinzufügen' }}
-    </BaseButton>
+    <ProgramToggleButton class="card__action" :session-id="session.id" />
   </article>
 </template>
 

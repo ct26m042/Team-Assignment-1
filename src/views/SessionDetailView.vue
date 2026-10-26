@@ -2,29 +2,18 @@
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import BaseBadge from '../components/base/BaseBadge.vue'
-import BaseButton from '../components/base/BaseButton.vue'
+import ProgramToggleButton from '../components/feature/ProgramToggleButton.vue'
 import { useConferenceData } from '../composables/useConferenceData'
-import { useMyProgram } from '../composables/useMyProgram'
 import { formatDay } from '../utils/formatDay'
 
 const route = useRoute()
 const { sessionById, trackById, roomById, speakersForSession } = useConferenceData()
-const { has, add, remove } = useMyProgram()
 
 const id = computed(() => String(route.params.id))
 const session = computed(() => sessionById(id.value))
 const track = computed(() => (session.value ? trackById(session.value.trackId) : undefined))
 const room = computed(() => (session.value ? roomById(session.value.roomId) : undefined))
 const speakers = computed(() => (session.value ? speakersForSession(session.value) : []))
-const saved = computed(() => has(id.value))
-
-function toggle() {
-  if (saved.value) {
-    remove(id.value)
-  } else {
-    add(id.value)
-  }
-}
 </script>
 
 <template>
@@ -62,9 +51,7 @@ function toggle() {
         </li>
       </ul>
     </div>
-    <BaseButton class="session__action" type="button" @click="toggle">
-      {{ saved ? 'Entfernen' : 'Zu meinem Programm hinzufügen' }}
-    </BaseButton>
+    <ProgramToggleButton class="session__action" :session-id="id" />
   </section>
   <section v-else class="session">
     <h1>Session nicht gefunden</h1>
