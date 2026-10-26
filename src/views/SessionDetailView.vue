@@ -63,7 +63,7 @@ function toggle() {
       </ul>
     </div>
     <BaseButton class="session__action" type="button" @click="toggle">
-      {{ saved ? 'Aus dem Programm nehmen' : 'Zum Programm hinzufügen' }}
+      {{ saved ? 'Entfernen' : 'Zu meinem Programm hinzufügen' }}
     </BaseButton>
   </section>
   <section v-else class="session">

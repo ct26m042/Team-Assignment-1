@@ -2,7 +2,7 @@
 
 ## Kontext
 
-Relay zeigt die Konferenz FrontendNow in vier Oberflächen: Start, Programmübersicht, Session-Detail und „Mein Programm“. Dieselben Session-Daten erscheinen an mehreren Stellen, und „Zum Programm hinzufügen“ muss auf der Karte, auf der Detailseite und im persönlichen Programm dasselbe tun. Die Ordnerstruktur muss diese Schichten sichtbar machen, bevor die Features in Schritt 2 gebaut werden. Eine flache Ablage aller `.vue`-Dateien würde die Grenze zwischen allgemeiner Oberfläche und Konferenzlogik erst im Code verstecken.
+Relay zeigt die Konferenz FrontendNow in vier Oberflächen: Start, Programmübersicht, Session-Detail und „Mein Programm“. Dieselben Session-Daten erscheinen an mehreren Stellen, und „Zu meinem Programm hinzufügen“ muss auf der Karte, auf der Detailseite und im persönlichen Programm dasselbe tun. Die Ordnerstruktur muss diese Schichten sichtbar machen, bevor die Features in Schritt 2 gebaut werden. Eine flache Ablage aller `.vue`-Dateien würde die Grenze zwischen allgemeiner Oberfläche und Konferenzlogik erst im Code verstecken.
 
 ## Optionen
 
@@ -10,7 +10,7 @@ Relay zeigt die Konferenz FrontendNow in vier Oberflächen: Start, Programmüber
 
 **Option 2: Drei Schichten, base, layout und feature.** `components/base` enthält Bausteine ohne Konferenzwissen, etwa Button und Badge. `components/layout` setzt den Rahmen, also Kopfzeile und Seitenhülle. `components/feature` enthält Bausteine, die Sessions, Tracks oder das persönliche Programm kennen. Views in `src/views` orchestrieren nur: Sie lesen Composables und setzen Feature-Komponenten zusammen. `src/composables` hält die Logik, `src/router` die Routen, `src/data` den statischen Datensatz.
 
-Für die zentrale Interaktion „Zum Programm hinzufügen“ stehen zwei Zuschnitte zur Wahl.
+Für die zentrale Interaktion „Zu meinem Programm hinzufügen“ stehen zwei Zuschnitte zur Wahl.
 
 **Gekoppelte Komponente.** Eine `AddToProgramButton` lädt `localStorage`, prüft die ID und zeichnet den Button. Das ist eine Datei weniger. Dieselbe Prüfung müsste die Detailseite und das Dashboard aber noch einmal bauen, oder sie müssten den Button auch dort einsetzen, selbst wenn die Darstellung anders sein soll.
 
@@ -18,7 +18,7 @@ Für die zentrale Interaktion „Zum Programm hinzufügen“ stehen zwei Zuschni
 
 ## Entscheidung
 
-Wir nehmen Option 2, die drei Schichten. „Zum Programm hinzufügen“ wird headless über `useMyProgram()` gebaut. Die Session-Filterung bleibt lokaler Zustand der Programm-View, bis eine zweite Oberfläche denselben Filter braucht.
+Wir nehmen Option 2, die drei Schichten. „Zu meinem Programm hinzufügen“ wird headless über `useMyProgram()` gebaut. Die Session-Filterung bleibt lokaler Zustand der Programm-View, bis eine zweite Oberfläche denselben Filter braucht.
 
 ## Konsequenzen
 

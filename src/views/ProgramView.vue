@@ -12,6 +12,14 @@ const filters = reactive({
   level: 'all',
 })
 
+const isFiltered = computed(() => Object.values(filters).some((value) => value !== 'all'))
+
+function resetFilters() {
+  filters.trackId = 'all'
+  filters.day = 'all'
+  filters.level = 'all'
+}
+
 const visible = computed(() =>
   sessions.filter((session) => {
     const trackOk = filters.trackId === 'all' || session.trackId === filters.trackId
@@ -57,6 +65,9 @@ const visible = computed(() =>
           </option>
         </select>
       </label>
+      <button type="button" class="filters__reset" :disabled="!isFiltered" @click="resetFilters">
+        Filter zurücksetzen
+      </button>
     </form>
 
     <p class="program__count">{{ visible.length }} von {{ sessions.length }} Sessions</p>
@@ -118,6 +129,22 @@ const visible = computed(() =>
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   padding: var(--space-2) var(--space-3);
+}
+
+.filters__reset {
+  align-self: end;
+  font: inherit;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+}
+
+.filters__reset:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
 }
 
 .program__list {

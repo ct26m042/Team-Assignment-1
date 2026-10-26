@@ -55,7 +55,7 @@ function toggle() {
       </RouterLink>
     </p>
     <BaseButton class="card__action" type="button" @click="toggle">
-      {{ saved ? 'Aus dem Programm nehmen' : 'Zum Programm hinzufügen' }}
+      {{ saved ? 'Entfernen' : 'Zu meinem Programm hinzufügen' }}
     </BaseButton>
   </article>
 </template>

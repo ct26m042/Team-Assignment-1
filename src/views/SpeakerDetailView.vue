@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import BackButton from '../components/base/BackButton.vue'
 import { useConferenceData } from '../composables/useConferenceData'
 import { formatDay } from '../utils/formatDay'
 
@@ -14,6 +15,7 @@ const sessions = computed(() => (speaker.value ? sessionsForSpeaker(speaker.valu
 
 <template>
   <section v-if="speaker" class="profile">
+    <BackButton />
     <p class="profile__role">{{ speaker.title }}, {{ speaker.company }}</p>
     <h1>{{ speaker.name }}</h1>
     <p class="profile__bio">{{ speaker.bio }}</p>
