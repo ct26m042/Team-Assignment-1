@@ -51,3 +51,52 @@ Die Übersicht ist ISR für die 20 Sessions und CSR nur für den Filterzustand. 
 ### Konsequenzen
 
 `useConferenceData()` liefert Sessions, Tracks, Tage und Level. Die View filtert lokal mit UND. Keine Treffer sind ein Zustand der View. Filter stehen nicht in der URL, weil Schritt 1 sie an diese eine Oberfläche gebunden hat. Eine Zeitplanänderung erreicht Übersicht und Detail mit demselben Build.
+
+## Session-Detailseiten
+
+Federführung: Nicoletta.
+
+### Kontext
+
+Eine Session-Detailseite zeigt Titel, Abstract, Tag, Start- und Endzeit, Raum, Track, Level, Format und die Speaker. Dieselben Felder gelten für jeden Besucher. Titel und Abstract sind stabiler als Raum und Uhrzeit: der Zeitplan kann sich ändern, ohne dass die Session eine andere wird. Die Seite hängt nicht am persönlichen Programm. Nur der Button zum Hinzufügen liest `localStorage`.
+
+### Optionen
+
+**ISR.** Die Seite entsteht aus dem letzten Katalog und neu, wenn sich der Zeitplan ändert. Besucher zwischen zwei Änderungen sehen denselben Stand. Das trifft Daten, die selten und für alle gleich wechseln.
+
+**SSR.** Jeder Request baut die Seite neu. Das ist sinnvoll, wenn der Stand pro Aufruf anders sein kann. Hier käme ein neuer Stand nur aus einer Datei, die sich zwischen zwei Requests nicht von selbst ändert. SSR würde dieselbe Seite wiederholen.
+
+**SSG ohne festgelegte Revalidierung.** Die Seite entstünde nur neben einem beliebigen Deploy. Eine Raum- oder Zeitänderung hinge dann nur daran, dass ohnehin gebaut wird.
+
+### Entscheidung
+
+Session-Detailseiten sind ISR. Die gespeicherte Generation ist der Vite-Build, der `conference-data.json` einbettet. Die Revalidierung ist der nächste Build, nachdem ein Session-Feld in dieser Datei geändert wurde. `meta.rendering` der Route `/sessions/:id` ist `isr`. Ein Revalidate-Endpunkt ist nicht Teil dieser Umsetzung. Die Aufgabe lässt diese Simulation zu.
+
+### Konsequenzen
+
+Die Seite löst IDs über `useConferenceData()` auf und verlinkt Speaker. Der Button zum Programm bleibt Client-Zustand über `useMyProgram()` und ändert die Strategie der Seite nicht. Fehlt eine ID, zeigt die Route einen leeren Zustand und den Weg zurück zur Übersicht. Ein späteres ISR kann dieselbe Route behalten.
+
+## Mein Programm
+
+Federführung: Nicoletta.
+
+### Kontext
+
+Mein Programm ist die Liste der Sessions, die eine Person für sich gespeichert hat. Gespeichert werden nur Session-IDs unter `relay.myProgram.v1` in `localStorage`, nicht die Session-Objekte. Titel, Raum und Speaker kommen beim Anzeigen aus `useConferenceData()`. Der Inhalt ist pro Browser verschieden, überlebt einen Reload und existiert auf dem Server nicht.
+
+### Optionen
+
+**CSR.** Der Browser liest die IDs beim Start, schneidet sie mit den bekannten Sessions und zeichnet die Liste. Hinzufügen und Entfernen schreiben sofort zurück. Das trifft Zustand, den nur dieser Browser kennt.
+
+**SSG.** Ein Build müsste ein Programm in HTML backen. Beim Build gibt es kein persönliches Programm, nur einen leeren Schlüssel. Die gebackene Seite wäre für alle gleich und damit für niemanden die eigene Liste.
+
+**SSR.** Der Server müsste die IDs kennen. `localStorage` liegt nicht im Request. SSR könnte nur eine leere Hülle schicken, die der Client mit den echten IDs füllt. Die Liste entstünde trotzdem im Browser.
+
+### Entscheidung
+
+Mein Programm ist CSR. `meta.rendering` der Route `/mein-programm` ist `csr`. `useMyProgram()` bleibt das Singleton aus Schritt 1: reaktive IDs, sofortiges Schreiben, beim Start der Abgleich mit den Sessions aus der JSON. Volle Objekte werden nicht persistiert, damit eine spätere Änderung von Titel oder Raum nicht an einer alten Kopie hängen bleibt.
+
+### Konsequenzen
+
+Die Seite löst jede ID über `sessionById` auf. Entfernen nutzt dieselbe Funktion wie Karte und Detailseite. Ein Reload zeigt dieselbe Liste, weil die IDs vor dem ersten Anzeigen aus `localStorage` kommen. Unbekannte IDs fallen beim Start weg und werden zurückgeschrieben.
+
