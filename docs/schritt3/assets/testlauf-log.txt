@@ -1,0 +1,34 @@
+
+== Szenario 1: Programm online geladen, dann offline neu geöffnet
+[server] online (Build v1)
+  SW kontrolliert: http://localhost:4173/sw.js
+  Caches: {"relay-programmdaten":["/assets/conference-data-C6UgLlA7.js"],"workbox-precache-v2-http://localhost:4173/":["/manifest.webmanifest","/index.html","/favicon.ico","/icons/icon-maskable-512.png","/icons/icon-512.png","/icons/icon-192.png","/icons/apple-touch-icon.png","/assets/workbox-window.prod.es5-BBnX5xw4.js","/assets/index-gSbg1C7X.css","/assets/index-CBmEiSiX.js"]}
+  s1-online-programm.png: {"url":"/programm","h1":"Programm","cards":20,"online":true,"controlled":true,"body":"Relay Start Programm Mein Programm Programm Alle Sessions der FrontendNow, filterbar nach Track, Tag und Level. Track Alle Tracks Frontend Architecture & Patt"}
+[server] gestoppt (Verbindungsabbruch zum Origin)
+[client] DevTools-Offline-Modus aktiv
+  s1-offline-programm.png: {"url":"/programm","h1":"Programm","cards":20,"online":false,"controlled":true,"body":"Relay Start Programm Mein Programm Programm Alle Sessions der FrontendNow, filterbar nach Track, Tag und Level. Track Alle Tracks Frontend Architecture & Patt"}
+  s1-offline-deeplink-session.png: {"url":"/sessions/s03","h1":"Design Tokens: Eine Sprache für Design und Code","cards":1,"online":false,"controlled":true,"body":"Relay Start Programm Mein Programm Zur Übersicht EINSTEIGER VORTRAG Design Tokens: Eine Sprache für Design und Code Wie Design Tokens Design-Tools und Codeba"}
+
+== Szenario 2: Mein Programm offline nach dem Hinzufügen
+[server] online (Build v1)
+  gespeichert: ["s01","s02","s03"]
+[server] gestoppt (Verbindungsabbruch zum Origin)
+[client] DevTools-Offline-Modus aktiv
+  s2-offline-mein-programm.png: {"url":"/mein-programm","h1":"Mein Programm","cards":3,"online":false,"controlled":true,"body":"Relay Start Programm Mein Programm Mein Programm 3 gespeicherte Sessions EINSTEIGER 15. September 2026, 09:00–09:45 Die Zukunft der Web-Frontends: Trends 20"}
+  s2-offline-mein-programm-reload (Screenshot identisch mit s2-offline-mein-programm.png): {"url":"/mein-programm","h1":"Mein Programm","cards":3,"online":false,"controlled":true,"body":"Relay Start Programm Mein Programm Mein Programm 3 gespeicherte Sessions EINSTEIGER 15. September 2026, 09:00–09:45 Die Zukunft der Web-Frontends: Trends 20"}
+
+== Szenario 3: Erstbesuch offline (frisches Profil, kein Service Worker)
+  goto / -> net::ERR_INTERNET_DISCONNECTED at http://localhost:4173/
+  s3-offline-erstbesuch.png: {"url":"/","h1":"Looks like you're not connected to the internet","cards":0,"online":false,"controlled":false,"body":"Looks like you're not connected to the internet Let's get you back online! ERR_INTERNET_DISCONNECTED Troubleshoot Want to play a game while you wait? Launch g"}
+
+== Zusatzszenario 4: Raumänderung erreicht einen Client mit altem Cache
+[server] online (Build v1)
+  v1 geladen, Raum: Hauptsaal
+[server] gestoppt (Verbindungsabbruch zum Origin)
+[server] online (Build v2)
+  Reload mit v2 auf dem Server, Raum: Hauptsaal
+  s4-update-hinweis.png: {"url":"/sessions/s01","h1":"Die Zukunft der Web-Frontends: Trends 2026+","cards":1,"online":true,"controlled":true,"body":"Relay Start Programm Mein Programm Zur Übersicht EINSTEIGER VORTRAG Die Zukunft der Web-Frontends: Trends 2026+ Ein Überblick über die Entwicklungen, die Fro"}
+  nach „Aktualisieren“, Raum: Saal C
+  Caches: {"relay-programmdaten":["/assets/conference-data-DOaEhNf0.js"],"workbox-precache-v2-http://localhost:4173/":["/manifest.webmanifest","/favicon.ico","/icons/icon-maskable-512.png","/icons/icon-512.png","/icons/icon-192.png","/icons/apple-touch-icon.png","/assets/workbox-window.prod.es5-BBnX5xw4.js","/assets/index-gSbg1C7X.css","/index.html","/assets/index-CJETcCDQ.js"]}
+  s4-nach-update.png: {"url":"/sessions/s01","h1":"Die Zukunft der Web-Frontends: Trends 2026+","cards":1,"online":true,"controlled":true,"body":"Relay Start Programm Mein Programm Zur Übersicht EINSTEIGER VORTRAG Die Zukunft der Web-Frontends: Trends 2026+ Ein Überblick über die Entwicklungen, die Fro"}
+[server] gestoppt (Verbindungsabbruch zum Origin)
