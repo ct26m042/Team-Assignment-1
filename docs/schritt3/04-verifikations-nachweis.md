@@ -8,7 +8,8 @@ Die Szenarien 1 und 2 zeigen, dass Übersicht, Detailseite und Mein Programm nac
 
 Lighthouse hat die PWA-Kategorie ab Version 12 entfernt. Der Audit lief deshalb mit Lighthouse 11.7.1 gegen Edge: PWA bestanden, das Manifest und der Service Worker erfüllen die Installierbarkeit. Offline-Verhalten prüft Lighthouse 11 nicht mehr, das decken die Szenarien ab.
 
-**Lücken:** Getestet wurde nur auf einem Rechner und nur in Chromium. Firefox, Safari auf iOS und eine echte Installation auf einem Telefon fehlen. Es gibt keine Screenshots der DevTools-Oberfläche, weil der Browser headless lief. Die Inhalte des Cache Storage stehen stattdessen im Log.
+Ein manueller Test in Chrome mit DevTools-Offline-Modus zeigt den Abbruch mitten in der Nutzung.
+
 
 ## Belege je Szenario
 
@@ -21,6 +22,7 @@ Lighthouse hat die PWA-Kategorie ab Version 12 entfernt. Der Audit lief deshalb 
 | 3, Erstbesuch offline | ![Edge-Fehlerseite ERR_INTERNET_DISCONNECTED](assets/s3-offline-erstbesuch.png) |
 | 4, Update-Hinweis | ![Alter Raum mit Update-Hinweis](assets/s4-update-hinweis.png) |
 | 4, nach „Aktualisieren“ | ![Neuer Raum Saal C](assets/s4-nach-update.png) |
+| Manuell, Chrome DevTools offline (Dev-Server) | ![Programm offline in Chrome, Network-Tab auf Offline](assets/devtools-offline-dev-server.webp) |
 | Iteration 1 | ![Fehlerseite ohne Navigation-Fallback](assets/iteration1-s1-offline-fehlerseite.png) |
 | Iteration 3 | ![Leere Seite ohne ignoreVary](assets/iteration3-s1-offline-leer.png) |
 

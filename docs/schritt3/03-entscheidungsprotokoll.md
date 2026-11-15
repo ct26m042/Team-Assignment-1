@@ -82,3 +82,13 @@ Die Regeln sind in drei Schritten entstanden, jeder Schritt wurde mit demselben 
 **Beobachtet:** Nach dem Reload steht weiter der Hauptsaal da, dazu „Ein neuer Programmstand ist verfügbar“. Nach „Aktualisieren“ zeigt die Seite Saal C. In `relay-programmdaten` liegt nur noch der neue Katalog `conference-data-DOaEhNf0.js`.
 
 **Ergebnis:** Verhalten wie entschieden. Das Szenario zeigt auch die Grenze: Ohne Klick oder ohne Netz bleibt der alte Raum sichtbar.
+
+### Manueller Test mit Chrome DevTools: Abbruch mitten in der Nutzung
+
+**Ausgangslage:** Chrome mit geöffneten DevTools, Relay über den Dev-Server (`npm run dev`, `localhost:5173`). `/programm` ist geladen, s01 steht in Mein Programm.
+
+**Aktion:** Im Network-Tab die Drosselung auf „Offline“ gestellt, „Keep log“ an, die Seite nicht neu geladen.
+
+**Beobachtet:** Die Übersicht bleibt mit „20 von 20 Sessions“ bedienbar, der Offline-Hinweis erscheint sofort. Das Log zeigt nur `devtools-overlay.css` der DevTools selbst, keine Anfrage von Relay. Chrome bietet in der Adressleiste „Install“ an ([Screenshot](assets/devtools-offline-dev-server.webp)).
+
+**Einordnung:** Belegt den schlimmsten Fall aus dem Konzept: Ein Abbruch während der Nutzung braucht kein Netz, weil die App schon geladen ist. Szenario 1 belegt der Test nicht, denn im Dev-Server läuft kein Service Worker. Ein Reload würde dort scheitern.
