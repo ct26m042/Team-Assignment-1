@@ -1,5 +1,6 @@
 <script setup>
 import AppHeader from './AppHeader.vue'
+import PwaStatus from './PwaStatus.vue'
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import AppHeader from './AppHeader.vue'
     <main class="shell__main">
       <RouterView />
     </main>
+    <PwaStatus />
   </div>
 </template>
 
